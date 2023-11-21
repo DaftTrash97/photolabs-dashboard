@@ -29,7 +29,13 @@ const data = [
 class Dashboard extends Component {
   state = {
     loading: false,
-    focused: 4
+    focused: null
+  };
+
+  selectPanel(id) {
+    this.setState(previousState => ({
+      focused: previousState.focused !== null ? null : id
+    }));
   };
 
   render() {
@@ -48,6 +54,7 @@ class Dashboard extends Component {
         id={panel.id}
         label={panel.label}
         value={panel.value}
+        onSelect={event => this.selectPanel(panel.id)}
       />
     ));
 
